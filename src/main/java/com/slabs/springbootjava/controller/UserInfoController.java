@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @create: 2019/03/18 11:00
@@ -33,4 +34,14 @@ public class UserInfoController {
         UserInfo userInfo = this.userInfoService.selectById(id);
         return RetResponse.makeOKRsp(userInfo);
     }
+
+    @PostMapping("/testException")
+    public RetResult<UserInfo> testException(Integer id){
+        List a = null;
+        a.size();
+        UserInfo userInfo = userInfoService.selectById(id);
+        return RetResponse.makeOKRsp(userInfo);
+    }
+
+
 }

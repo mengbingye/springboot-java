@@ -1,9 +1,11 @@
 package com.slabs.springbootjava.service.impl;
 
+import com.slabs.springbootjava.core.ret.ServiceException;
 import com.slabs.springbootjava.dao.UserInfoMapper;
 import com.slabs.springbootjava.model.UserInfo;
 import com.slabs.springbootjava.service.IUserInfoService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 
@@ -18,6 +20,11 @@ public class UserInfoService implements IUserInfoService {
 
     @Override
     public UserInfo selectById(Integer id) {
-        return this.userInfoMapper.selectById(id);
+        UserInfo userInfo = this.userInfoMapper.selectById(id);
+        if (ObjectUtils.isEmpty(userInfo)) {
+            throw new ServiceException("暂无该用户");
+        }
+        return userInfo;
+
     }
 }
