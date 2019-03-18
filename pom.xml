@@ -27,6 +27,8 @@
         <commons-lang3.version>3.5</commons-lang3.version>
         <guava.version>22.0</guava.version>
         <commons-codec.version>1.10</commons-codec.version>
+        <mysql.driver.version>5.1.36</mysql.driver.version>
+        <jsoup.version>1.10.2</jsoup.version>
     </properties>
 
     <dependencies>
@@ -48,6 +50,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.driver.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -151,7 +154,19 @@
             <version>2.3.28</version>
         </dependency>
 
+        <!--redis 依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+            <version>1.4.5.RELEASE</version>
+        </dependency>
 
+        <!--jsoup-->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>${jsoup.version}</version>
+        </dependency>
     </dependencies>
 
 

@@ -11,6 +11,10 @@
 ###################alibaba.druid
 
 spring:
+  redis:
+    hostName: 192.168.50.89
+    port: 6380
+    password: 123456
   datasource:
     #主数据源
     type: com.alibaba.druid.pool.DruidDataSource
@@ -61,3 +65,5 @@ pagehelper:
 
 mapper:
   mappers: com.slabs.springbootjava.core.universal.Mapper
+
+
