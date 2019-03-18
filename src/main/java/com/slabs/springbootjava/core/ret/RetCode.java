@@ -2,10 +2,11 @@ package com.slabs.springbootjava.core.ret;
 
 /**
  * 定义的状态码
+ *
  * @create: 2019/03/18 11:53
  */
 
-public enum  RetCode {
+public enum RetCode {
     // 成功
     SUCCESS(200),
 

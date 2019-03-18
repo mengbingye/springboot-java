@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * 基于通用MyBatis Mapper插件的Service接口的实现
+ *
  * @create: 2019/03/18 15:44
  */
 
@@ -68,7 +69,7 @@ public abstract class AbstractService<T> implements Service<T> {
     }
 
     @Override
-    public List<T> selectListBy(String fieldName, Object value)  {
+    public List<T> selectListBy(String fieldName, Object value) {
         try {
             T model = modelClass.newInstance();
             Field field = modelClass.getDeclaredField(fieldName);
@@ -96,12 +97,12 @@ public abstract class AbstractService<T> implements Service<T> {
     }
 
     @Override
-    public List<T> select(T record){
+    public List<T> select(T record) {
         return mapper.select(record);
     }
 
     @Override
-    public T selectOne(T recoed){
+    public T selectOne(T recoed) {
         return mapper.selectOne(recoed);
     }
 

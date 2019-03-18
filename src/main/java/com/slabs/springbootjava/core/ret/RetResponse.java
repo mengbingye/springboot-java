@@ -2,6 +2,7 @@ package com.slabs.springbootjava.core.ret;
 
 /**
  * 将结果转换为封装后的对象
+ *
  * @create: 2019/03/18 12:02
  */
 

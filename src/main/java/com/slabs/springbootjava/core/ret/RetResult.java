@@ -2,6 +2,7 @@ package com.slabs.springbootjava.core.ret;
 
 /**
  * 返回对象的实体类
+ *
  * @create: 2019/03/18 11:57
  */
 

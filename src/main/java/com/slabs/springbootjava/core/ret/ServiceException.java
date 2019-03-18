@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * 业务异常类
+ *
  * @create: 2019/03/18 13:39
  */
 @NoArgsConstructor

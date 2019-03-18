@@ -11,16 +11,16 @@
     </sql>
 
     <!--<select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
-        <!--select-->
-        <!--<include refid="Base_Column_List"/>-->
-        <!--from user_info-->
-        <!--where id = #{id,jdbcType=VARCHAR}-->
+    <!--select-->
+    <!--<include refid="Base_Column_List"/>-->
+    <!--from user_info-->
+    <!--where id = #{id,jdbcType=VARCHAR}-->
     <!--</select>-->
 
 
     <!--<select id="selectAll" resultMap="BaseResultMap">-->
-        <!--select-->
-        <!--<include refid="Base_Column_List"/>-->
-        <!--from user_info-->
+    <!--select-->
+    <!--<include refid="Base_Column_List"/>-->
+    <!--from user_info-->
     <!--</select>-->
 </mapper>

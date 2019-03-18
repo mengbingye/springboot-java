@@ -1,7 +1,6 @@
 package com.slabs.springbootjava.service.impl;
 
 
-
 import com.slabs.springbootjava.core.ret.ServiceException;
 import com.slabs.springbootjava.core.universal.AbstractService;
 import com.slabs.springbootjava.dao.UserInfoMapper;

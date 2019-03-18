@@ -55,6 +55,7 @@ public class WebConfigurer extends WebMvcConfigurationSupport {
 
     /**
      * 修改自定义消息转换
+     *
      * @param converters
      */
     @Override
@@ -106,10 +107,11 @@ public class WebConfigurer extends WebMvcConfigurationSupport {
 
     /**
      * 创建异常处理
+     *
      * @return
      */
-    private HandlerExceptionResolver getHandlerExceptionResolver(){
-        HandlerExceptionResolver handlerExceptionResolver = new HandlerExceptionResolver(){
+    private HandlerExceptionResolver getHandlerExceptionResolver() {
+        HandlerExceptionResolver handlerExceptionResolver = new HandlerExceptionResolver() {
             @Override
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
                                                  Object handler, Exception e) {
@@ -123,12 +125,13 @@ public class WebConfigurer extends WebMvcConfigurationSupport {
 
     /**
      * 根据异常类型确定返回数据
+     *
      * @param request
      * @param handler
      * @param e
      * @return
      */
-    private RetResult<Object> getResuleByHeandleException(HttpServletRequest request, Object handler, Exception e){
+    private RetResult<Object> getResuleByHeandleException(HttpServletRequest request, Object handler, Exception e) {
         RetResult<Object> result = new RetResult<>();
         if (e instanceof ServiceException) {
             result.setCode(RetCode.FAIL).setMsg(e.getMessage()).setData(null);
@@ -143,7 +146,7 @@ public class WebConfigurer extends WebMvcConfigurationSupport {
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             message = String.format("接口 [%s] 出现异常，方法：%s.%s，异常摘要：%s", request.getRequestURI(),
-                    handlerMethod.getBean().getClass().getName(), handlerMethod.getMethod() .getName(), e.getMessage());
+                    handlerMethod.getBean().getClass().getName(), handlerMethod.getMethod().getName(), e.getMessage());
         } else {
             message = e.getMessage();
         }
@@ -152,10 +155,10 @@ public class WebConfigurer extends WebMvcConfigurationSupport {
     }
 
     /**
-     * @Title: responseResult
-     * @Description: 响应结果
      * @param response
      * @param result
+     * @Title: responseResult
+     * @Description: 响应结果
      * @Reutrn void
      */
     private void responseResult(HttpServletResponse response, RetResult<Object> result) {
