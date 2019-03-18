@@ -1,5 +1,6 @@
 package com.slabs.springbootjava.service;
 
+import com.github.pagehelper.PageInfo;
 import com.slabs.springbootjava.model.UserInfo;
 
 /**
@@ -9,4 +10,7 @@ import com.slabs.springbootjava.model.UserInfo;
 public interface IUserInfoService {
 
     UserInfo selectById(Integer id);
+
+
+    PageInfo<UserInfo> selectAll(Integer page, Integer size);
 }

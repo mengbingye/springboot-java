@@ -20,6 +20,7 @@
         <fastjson.version>1.2.22</fastjson.version>
         <swagger.version>2.9.2</swagger.version>
         <swagger-bootstrap-ui.version>1.9.1</swagger-bootstrap-ui.version>
+        <pagehelper.version>1.2.5</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -90,6 +91,15 @@
             <artifactId>swagger-bootstrap-ui</artifactId>
             <version>${swagger-bootstrap-ui.version}</version>
         </dependency>
+
+
+        <!--pagehelper 分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -46,3 +46,11 @@ spring.mvc.throw-exception-if-no-handler-found: true
 spring.resources.add-mappings: false
 
 
+
+logging.level.com.slabs.springbootjava.dao: DEBUG
+pagehelper.helperDialect: mysql
+pagehelper.reasonable: true
+pagehelper.supportMethodsArguments: true
+pagehelper.params=count: countSql
+pagehelper.page-size-zero: true
+

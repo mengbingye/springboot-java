@@ -1,5 +1,6 @@
 package com.slabs.springbootjava.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.slabs.springbootjava.core.ret.RetResponse;
 import com.slabs.springbootjava.core.ret.RetResult;
 import com.slabs.springbootjava.model.UserInfo;
@@ -51,4 +52,17 @@ public class UserInfoController {
     }
 
 
+    @ApiOperation(value = "查询用户", notes = "分页查询用户所有")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页码",
+                    dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "size", value = "每页显示条数",
+                    dataType = "Integer", paramType = "query")
+    })
+    @GetMapping("/selectAll")
+    public RetResult<PageInfo<UserInfo>> selectAll(@RequestParam(defaultValue = "0") Integer page,
+                                                   @RequestParam(defaultValue = "0") Integer size) {
+        PageInfo<UserInfo> pageInfo = userInfoService.selectAll(page, size);
+        return RetResponse.makeOKRsp(pageInfo);
+    }
 }
