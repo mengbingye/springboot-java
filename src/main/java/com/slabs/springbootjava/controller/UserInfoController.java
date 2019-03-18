@@ -4,10 +4,11 @@ import com.slabs.springbootjava.core.ret.RetResponse;
 import com.slabs.springbootjava.core.ret.RetResult;
 import com.slabs.springbootjava.model.UserInfo;
 import com.slabs.springbootjava.service.IUserInfoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/users")
+@Api(tags = {"用户操作接口"},description = "userInfoController")
 public class UserInfoController {
 
     @Resource
@@ -29,8 +31,13 @@ public class UserInfoController {
     }
 
 
+    @ApiOperation(value = "查询用户", notes = "根据用户ID查询用户")
+    @ApiImplicitParams(
+            {@ApiImplicitParam(name = "id",value = "用户Id",required = true,
+            dataType = "Integer",paramType = "query")}
+    )
     @PostMapping
-    public RetResult<UserInfo> selectById(Integer id){
+    public RetResult<UserInfo> selectById(@RequestParam Integer id){
         UserInfo userInfo = this.userInfoService.selectById(id);
         return RetResponse.makeOKRsp(userInfo);
     }
