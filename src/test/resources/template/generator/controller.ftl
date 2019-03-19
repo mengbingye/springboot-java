@@ -63,7 +63,7 @@ ${modelNameLowerCamel}.setId(ApplicationUtils.getUUID());
             <PageInfo
             <${modelNameUpperCamel}>>
             */
-            @PostMapping("/list")
+            @GetMapping("/list")
             public RetResult
             <PageInfo
             <${modelNameUpperCamel}>> list(@RequestParam(defaultValue = "0") Integer page,
