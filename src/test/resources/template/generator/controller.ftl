@@ -73,4 +73,4 @@ ${modelNameLowerCamel}.setId(ApplicationUtils.getUUID());
             PageInfo<${modelNameUpperCamel}> pageInfo = new PageInfo<${modelNameUpperCamel}>(list);
             return RetResponse.makeOKRsp(pageInfo);
             }
-}
+            }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
  * 重写请求参数处理函数
+ *
  * @create: 2019/03/19 09:58
  */
 
@@ -22,8 +23,6 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         orgRequest = request;
         this.isIncludeRichText = isIncludeRichText;
     }
-
-
 
 
     /**

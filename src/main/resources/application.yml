@@ -49,11 +49,10 @@ spring:
     mvc.throw-exception-if-no-handler-found: true
     spring.resources.add-mappings: false
 
-
-
 logging:
   level:
     com.slabs.springbootjava.dao: DEBUG
+
 
 pagehelper:
   helperDialect: mysql
@@ -66,4 +65,8 @@ pagehelper:
 mapper:
   mappers: com.slabs.springbootjava.core.universal.Mapper
 
-
+#shiro配置
+#用户未登录
+shiro.loginUrl: /shiroUtils/noLogin
+#用户没有权限
+shiro.unauthorizedUrl: /shiroUtils/noAuthorize

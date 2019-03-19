@@ -26,7 +26,7 @@ public class CodeGenerator {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/demo";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "123456";
-    private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+    private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
     // 模板位置
     private static final String TEMPLATE_FILE_PATH = "src/test/resources/template/generator";
     private static final String JAVA_PATH = "src/main/java"; // java文件路径
@@ -48,8 +48,9 @@ public class CodeGenerator {
      *
      * @param args
      */
+
     public static void main(String[] args) {
-        genCode("system_log");
+        genCode("role_perm", "sys_perm", "sys_role", "system_log", "user_info", "user_role");
     }
 
     /**

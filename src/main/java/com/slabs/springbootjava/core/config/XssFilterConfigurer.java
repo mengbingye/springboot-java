@@ -22,7 +22,7 @@ public class XssFilterConfigurer {
     public FilterRegistrationBean xssFilterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new XssFilter());
-        filterRegistrationBean.setOrder(Integer.MAX_VALUE-1);
+        filterRegistrationBean.setOrder(Integer.MAX_VALUE - 1);
         filterRegistrationBean.setEnabled(true);
         filterRegistrationBean.addUrlPatterns("/*");
         Map<String, String> initParameters = new HashMap();

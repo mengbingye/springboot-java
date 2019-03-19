@@ -19,8 +19,19 @@ public enum RetCode {
     // 接口不存在
     NOT_FOUND(404),
 
+    /**
+     * 未登录
+     */
+    UNAUTHEN(4401),
+
+    /**
+     * 未授权，拒绝访问
+     */
+    UNAUTHZ(4403),
+
     // 服务器内部错误
     INTERNAL_SERVER_ERROR(500);
+
 
     public int code;
 

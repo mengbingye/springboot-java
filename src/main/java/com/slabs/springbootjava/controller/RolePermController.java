@@ -3,8 +3,8 @@ package com.slabs.springbootjava.controller;
 import com.slabs.springbootjava.core.ret.RetResult;
 import com.slabs.springbootjava.core.ret.RetResponse;
 import com.slabs.springbootjava.core.utils.ApplicationUtils;
-import com.slabs.springbootjava.model.SystemLog;
-import com.slabs.springbootjava.service.SystemLogService;
+import com.slabs.springbootjava.model.RolePerm;
+import com.slabs.springbootjava.service.RolePermService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,42 +17,42 @@ import java.util.List;
 
 /**
  * @author BingYe
- * @Description: SystemLogController类
+ * @Description: RolePermController类
  * @date 2019/03/19 10:41
  */
 @RestController
-@RequestMapping("/systemLog")
-public class SystemLogController {
+@RequestMapping("/rolePerm")
+public class RolePermController {
 
     @Resource
-    private SystemLogService systemLogService;
+    private RolePermService rolePermService;
 
     @PostMapping("/insert")
     public RetResult
-            <Integer> insert(SystemLog systemLog) throws Exception {
-        systemLog.setId(ApplicationUtils.getUUID());
-        Integer state = systemLogService.insert(systemLog);
+            <Integer> insert(RolePerm rolePerm) throws Exception {
+        rolePerm.setId(ApplicationUtils.getUUID());
+        Integer state = rolePermService.insert(rolePerm);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/deleteById")
     public RetResult
             <Integer> deleteById(@RequestParam String id) throws Exception {
-        Integer state = systemLogService.deleteById(id);
+        Integer state = rolePermService.deleteById(id);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/update")
     public RetResult
-            <Integer> update(SystemLog systemLog) throws Exception {
-        Integer state = systemLogService.update(systemLog);
+            <Integer> update(RolePerm rolePerm) throws Exception {
+        Integer state = rolePermService.update(rolePerm);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/selectById")
-    public RetResult<SystemLog> selectById(@RequestParam String id) throws Exception {
-        SystemLog systemLog = systemLogService.selectById(id);
-        return RetResponse.makeOKRsp(systemLog);
+    public RetResult<RolePerm> selectById(@RequestParam String id) throws Exception {
+        RolePerm rolePerm = rolePermService.selectById(id);
+        return RetResponse.makeOKRsp(rolePerm);
     }
 
     /**
@@ -61,16 +61,16 @@ public class SystemLogController {
      * @Description: 分页查询
      * @Reutrn RetResult
      * <PageInfo
-     * <SystemLog>>
+     * <RolePerm>>
      */
     @PostMapping("/list")
     public RetResult
             <PageInfo
-                    <SystemLog>> list(@RequestParam(defaultValue = "0") Integer page,
-                                      @RequestParam(defaultValue = "0") Integer size) throws Exception {
+                    <RolePerm>> list(@RequestParam(defaultValue = "0") Integer page,
+                                     @RequestParam(defaultValue = "0") Integer size) throws Exception {
         PageHelper.startPage(page, size);
-        List<SystemLog> list = systemLogService.selectAll();
-        PageInfo<SystemLog> pageInfo = new PageInfo<SystemLog>(list);
+        List<RolePerm> list = rolePermService.selectAll();
+        PageInfo<RolePerm> pageInfo = new PageInfo<RolePerm>(list);
         return RetResponse.makeOKRsp(pageInfo);
     }
 }

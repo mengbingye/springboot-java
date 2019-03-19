@@ -30,6 +30,7 @@
         <mysql.driver.version>5.1.36</mysql.driver.version>
         <redis.version>1.4.5.RELEASE</redis.version>
         <jsoup.version>1.10.2</jsoup.version>
+        <shiro.version>1.4.0-RC2</shiro.version>
     </properties>
 
     <dependencies>
@@ -168,6 +169,14 @@
             <artifactId>jsoup</artifactId>
             <version>${jsoup.version}</version>
         </dependency>
+
+        <!-- shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-web-starter</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+
     </dependencies>
 
 

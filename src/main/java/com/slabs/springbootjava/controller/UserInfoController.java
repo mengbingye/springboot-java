@@ -1,72 +1,94 @@
 package com.slabs.springbootjava.controller;
 
+import com.slabs.springbootjava.core.ret.RetResult;
+import com.slabs.springbootjava.core.ret.RetResponse;
+import com.slabs.springbootjava.core.ret.ServiceException;
+import com.slabs.springbootjava.core.utils.ApplicationUtils;
+import com.slabs.springbootjava.model.UserInfo;
+import com.slabs.springbootjava.service.UserInfoService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.slabs.springbootjava.core.ret.RetResponse;
-import com.slabs.springbootjava.core.ret.RetResult;
-import com.slabs.springbootjava.model.UserInfo;
-import com.slabs.springbootjava.service.IUserInfoService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @create: 2019/03/18 11:00
+ * @author BingYe
+ * @Description: UserInfoController类
+ * @date 2019/03/19 10:41
  */
 @RestController
-@RequestMapping("/users")
-@Api(tags = {"用户操作接口"}, description = "userInfoController")
+@RequestMapping("/userInfo")
 public class UserInfoController {
 
     @Resource
-    private IUserInfoService userInfoService;
+    private UserInfoService userInfoService;
 
 
-    @GetMapping
-    public String hello() {
-        return "hello  Springboot";
+    @PostMapping("/login")
+    public RetResult<UserInfo> login(String userName, String password) {
+        Subject currentUser = SecurityUtils.getSubject();
+        //登录
+        try {
+            currentUser.login(new UsernamePasswordToken(userName, password));
+        } catch (IncorrectCredentialsException i) {
+            throw new ServiceException("密码输入错误");
+        }
+        //从session取出用户信息
+        UserInfo user = (UserInfo) currentUser.getPrincipal();
+        return RetResponse.makeOKRsp(user);
     }
 
 
-    @ApiOperation(value = "查询用户", notes = "根据用户ID查询用户")
-    @ApiImplicitParams(
-            {@ApiImplicitParam(name = "id", value = "用户Id", required = true,
-                    dataType = "String", paramType = "query")}
-    )
-    @PostMapping
-    public RetResult<UserInfo> selectById(@RequestParam String id) {
-        System.out.println(id);
-        UserInfo userInfo = this.userInfoService.selectById(id);
-        return RetResponse.makeOKRsp(userInfo);
+    @PostMapping("/insert")
+    public RetResult
+            <Integer> insert(UserInfo userInfo) throws Exception {
+        userInfo.setId(ApplicationUtils.getUUID());
+        Integer state = userInfoService.insert(userInfo);
+        return RetResponse.makeOKRsp(state);
     }
 
-    @PostMapping("/testException")
-    public RetResult<UserInfo> testException(String id) {
-        List a = null;
-        a.size();
+    @PostMapping("/deleteById")
+    public RetResult
+            <Integer> deleteById(@RequestParam String id) throws Exception {
+        Integer state = userInfoService.deleteById(id);
+        return RetResponse.makeOKRsp(state);
+    }
+
+    @PostMapping("/update")
+    public RetResult
+            <Integer> update(UserInfo userInfo) throws Exception {
+        Integer state = userInfoService.update(userInfo);
+        return RetResponse.makeOKRsp(state);
+    }
+
+    @GetMapping("/selectById")
+    public RetResult<UserInfo> selectById(@RequestParam String id) throws Exception {
         UserInfo userInfo = userInfoService.selectById(id);
         return RetResponse.makeOKRsp(userInfo);
     }
 
-
-    @ApiOperation(value = "查询用户", notes = "分页查询用户所有")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "当前页码",
-                    dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "size", value = "每页显示条数",
-                    dataType = "Integer", paramType = "query")
-    })
+    /**
+     * @param page 页码
+     * @param size 每页条数
+     * @Description: 分页查询
+     * @Reutrn RetResult
+     * <PageInfo
+     * <UserInfo>>
+     */
     @GetMapping("/selectAll")
-    public RetResult<PageInfo<UserInfo>> selectAll(@RequestParam(defaultValue = "0") Integer page,
-                                                   @RequestParam(defaultValue = "0") Integer size) {
+    public RetResult
+            <PageInfo
+                    <UserInfo>> list(@RequestParam(defaultValue = "0") Integer page,
+                                     @RequestParam(defaultValue = "0") Integer size) throws Exception {
         PageHelper.startPage(page, size);
-        List<UserInfo> userInfos = this.userInfoService.selectAll();
-        PageInfo<UserInfo> pageInfo = new PageInfo<>(userInfos);
+        List<UserInfo> list = userInfoService.selectAll();
+        PageInfo<UserInfo> pageInfo = new PageInfo<UserInfo>(list);
         return RetResponse.makeOKRsp(pageInfo);
     }
 }

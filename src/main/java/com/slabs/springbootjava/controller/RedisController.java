@@ -23,7 +23,7 @@ public class RedisController {
 
     @PostMapping
     public RetResult<String> setRedis(String name) {
-        redisService.set("name",name);
+        redisService.set("name", name);
         return RetResponse.makeOKRsp(name);
     }
 
