@@ -33,7 +33,7 @@ public class UserInfoServiceImpl extends AbstractService<UserInfo> implements Us
 
     @Override
     public List<UserInfo> selectAll(int pageNum, int pageSize) {
-        return userInfoMapper.selectAll(pageNum,pageSize);
+        return userInfoMapper.selectAll(pageNum, pageSize);
     }
 
 

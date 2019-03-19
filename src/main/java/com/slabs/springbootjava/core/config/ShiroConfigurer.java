@@ -1,6 +1,8 @@
 package com.slabs.springbootjava.core.config;
 
 import com.slabs.springbootjava.core.shiro.CustomRealm;
+import com.slabs.springbootjava.model.SysPermissionInit;
+import com.slabs.springbootjava.service.SysPermissionInitService;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
@@ -8,12 +10,19 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
  * @create: 2019/03/19 11:47
  */
 
 @Configuration
 public class ShiroConfigurer {
+
+
+    @Resource
+    private SysPermissionInitService sysPermissionInitService;
 
     /**
      * 注入自定义的realm，告诉shiro如何获取用户信息来做登录或权限控制
@@ -43,12 +52,11 @@ public class ShiroConfigurer {
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chain = new DefaultShiroFilterChainDefinition();
-//        chain.addPathDefinition("/userInfo/selectById", "anon");
-        chain.addPathDefinition("/logout", "anon");
-        chain.addPathDefinition("/userInfo/selectAll", "anon");
-        chain.addPathDefinition("/userInfo/login", "anon");
-        chain.addPathDefinition("/userInfo/selectById", "authc, roles[admin]");
-        chain.addPathDefinition("/**", "authc");
+        List<SysPermissionInit> list = sysPermissionInitService.selectAllOrderBySort();
+        for(int i = 0,length = list.size();i<length;i++){
+            SysPermissionInit sysPermissionInit = list.get(i);
+            chain.addPathDefinition(sysPermissionInit.getUrl(), sysPermissionInit.getPermissionInit());
+        }
         return chain;
     }
 

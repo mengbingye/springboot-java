@@ -50,7 +50,8 @@ public class CodeGenerator {
      */
 
     public static void main(String[] args) {
-        genCode("role_perm", "sys_perm", "sys_role", "system_log", "user_info", "user_role");
+//        genCode("role_perm", "sys_perm", "sys_role", "system_log", "user_info", "user_role");
+        genCode("sys_permission_init");
     }
 
     /**
