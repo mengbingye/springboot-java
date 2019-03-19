@@ -40,6 +40,7 @@ public class UserInfoController {
     )
     @PostMapping
     public RetResult<UserInfo> selectById(@RequestParam String id) {
+        System.out.println(id);
         UserInfo userInfo = this.userInfoService.selectById(id);
         return RetResponse.makeOKRsp(userInfo);
     }
