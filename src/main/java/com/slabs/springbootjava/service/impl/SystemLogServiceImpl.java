@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author BingYe
@@ -20,4 +21,8 @@ public class SystemLogServiceImpl extends AbstractService<SystemLog> implements 
     @Resource
     private SystemLogMapper systemLogMapper;
 
+    @Override
+    public Integer insertByBatch(List<SystemLog> list) {
+        return this.systemLogMapper.insertByBatch(list);
+    }
 }

@@ -1,5 +1,6 @@
 package com.slabs.springbootjava.controller;
 
+import com.slabs.springbootjava.core.aop.AnnotationLog;
 import com.slabs.springbootjava.core.ret.RetResult;
 import com.slabs.springbootjava.core.ret.RetResponse;
 import com.slabs.springbootjava.core.ret.ServiceException;
@@ -68,6 +69,7 @@ public class UserInfoController {
     }
 
     @GetMapping("/selectById")
+    @AnnotationLog(remark = "查询")
     public RetResult<UserInfo> selectById(@RequestParam String id) throws Exception {
         UserInfo userInfo = userInfoService.selectById(id);
         return RetResponse.makeOKRsp(userInfo);
