@@ -28,23 +28,20 @@ public class SysPermController {
     private SysPermService sysPermService;
 
     @PostMapping("/insert")
-    public RetResult
-            <Integer> insert(SysPerm sysPerm) throws Exception {
+    public RetResult<Integer> insert(SysPerm sysPerm) throws Exception {
         sysPerm.setId(ApplicationUtils.getUUID());
         Integer state = sysPermService.insert(sysPerm);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/deleteById")
-    public RetResult
-            <Integer> deleteById(@RequestParam String id) throws Exception {
+    public RetResult<Integer> deleteById(@RequestParam String id) throws Exception {
         Integer state = sysPermService.deleteById(id);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/update")
-    public RetResult
-            <Integer> update(SysPerm sysPerm) throws Exception {
+    public RetResult<Integer> update(SysPerm sysPerm) throws Exception {
         Integer state = sysPermService.update(sysPerm);
         return RetResponse.makeOKRsp(state);
     }
@@ -64,10 +61,8 @@ public class SysPermController {
      * <SysPerm>>
      */
     @PostMapping("/list")
-    public RetResult
-            <PageInfo
-                    <SysPerm>> list(@RequestParam(defaultValue = "0") Integer page,
-                                    @RequestParam(defaultValue = "0") Integer size) throws Exception {
+    public RetResult<PageInfo<SysPerm>> list(@RequestParam(defaultValue = "0") Integer page,
+                                             @RequestParam(defaultValue = "0") Integer size) throws Exception {
         PageHelper.startPage(page, size);
         List<SysPerm> list = sysPermService.selectAll();
         PageInfo<SysPerm> pageInfo = new PageInfo<SysPerm>(list);

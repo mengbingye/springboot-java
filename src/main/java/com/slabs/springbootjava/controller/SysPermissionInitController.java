@@ -25,16 +25,14 @@ public class SysPermissionInitController {
     private SysPermissionInitService sysPermissionInitService;
 
     @PostMapping("/insert")
-    public RetResult
-            <Integer> insert(SysPermissionInit sysPermissionInit) throws Exception {
+    public RetResult<Integer> insert(SysPermissionInit sysPermissionInit) throws Exception {
         sysPermissionInit.setId(ApplicationUtils.getUUID());
         Integer state = sysPermissionInitService.insert(sysPermissionInit);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/deleteById")
-    public RetResult
-            <Integer> deleteById(@RequestParam String id) throws Exception {
+    public RetResult<Integer> deleteById(@RequestParam String id) throws Exception {
         Integer state = sysPermissionInitService.deleteById(id);
         return RetResponse.makeOKRsp(state);
     }
@@ -61,10 +59,8 @@ public class SysPermissionInitController {
      * <SysPermissionInit>>
      */
     @GetMapping("/list")
-    public RetResult
-            <PageInfo
-                    <SysPermissionInit>> list(@RequestParam(defaultValue = "0") Integer page,
-                                              @RequestParam(defaultValue = "0") Integer size) throws Exception {
+    public RetResult<PageInfo<SysPermissionInit>> list(@RequestParam(defaultValue = "0") Integer page,
+                                                       @RequestParam(defaultValue = "0") Integer size) throws Exception {
         PageHelper.startPage(page, size);
         List<SysPermissionInit> list = sysPermissionInitService.selectAll();
         PageInfo<SysPermissionInit> pageInfo = new PageInfo<SysPermissionInit>(list);

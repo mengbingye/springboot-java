@@ -28,23 +28,20 @@ public class SystemLogController {
     private SystemLogService systemLogService;
 
     @PostMapping("/insert")
-    public RetResult
-            <Integer> insert(SystemLog systemLog) throws Exception {
+    public RetResult<Integer> insert(SystemLog systemLog) throws Exception {
         systemLog.setId(ApplicationUtils.getUUID());
         Integer state = systemLogService.insert(systemLog);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/deleteById")
-    public RetResult
-            <Integer> deleteById(@RequestParam String id) throws Exception {
+    public RetResult<Integer> deleteById(@RequestParam String id) throws Exception {
         Integer state = systemLogService.deleteById(id);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/update")
-    public RetResult
-            <Integer> update(SystemLog systemLog) throws Exception {
+    public RetResult<Integer> update(SystemLog systemLog) throws Exception {
         Integer state = systemLogService.update(systemLog);
         return RetResponse.makeOKRsp(state);
     }
@@ -64,10 +61,8 @@ public class SystemLogController {
      * <SystemLog>>
      */
     @PostMapping("/list")
-    public RetResult
-            <PageInfo
-                    <SystemLog>> list(@RequestParam(defaultValue = "0") Integer page,
-                                      @RequestParam(defaultValue = "0") Integer size) throws Exception {
+    public RetResult<PageInfo<SystemLog>> list(@RequestParam(defaultValue = "0") Integer page,
+                                               @RequestParam(defaultValue = "0") Integer size) throws Exception {
         PageHelper.startPage(page, size);
         List<SystemLog> list = systemLogService.selectAll();
         PageInfo<SystemLog> pageInfo = new PageInfo<SystemLog>(list);

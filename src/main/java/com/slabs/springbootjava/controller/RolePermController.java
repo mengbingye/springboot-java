@@ -28,23 +28,20 @@ public class RolePermController {
     private RolePermService rolePermService;
 
     @PostMapping("/insert")
-    public RetResult
-            <Integer> insert(RolePerm rolePerm) throws Exception {
+    public RetResult<Integer> insert(RolePerm rolePerm) throws Exception {
         rolePerm.setId(ApplicationUtils.getUUID());
         Integer state = rolePermService.insert(rolePerm);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/deleteById")
-    public RetResult
-            <Integer> deleteById(@RequestParam String id) throws Exception {
+    public RetResult<Integer> deleteById(@RequestParam String id) throws Exception {
         Integer state = rolePermService.deleteById(id);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/update")
-    public RetResult
-            <Integer> update(RolePerm rolePerm) throws Exception {
+    public RetResult<Integer> update(RolePerm rolePerm) throws Exception {
         Integer state = rolePermService.update(rolePerm);
         return RetResponse.makeOKRsp(state);
     }
@@ -64,10 +61,8 @@ public class RolePermController {
      * <RolePerm>>
      */
     @PostMapping("/list")
-    public RetResult
-            <PageInfo
-                    <RolePerm>> list(@RequestParam(defaultValue = "0") Integer page,
-                                     @RequestParam(defaultValue = "0") Integer size) throws Exception {
+    public RetResult<PageInfo<RolePerm>> list(@RequestParam(defaultValue = "0") Integer page,
+                                              @RequestParam(defaultValue = "0") Integer size) throws Exception {
         PageHelper.startPage(page, size);
         List<RolePerm> list = rolePermService.selectAll();
         PageInfo<RolePerm> pageInfo = new PageInfo<RolePerm>(list);

@@ -28,23 +28,20 @@ public class UserRoleController {
     private UserRoleService userRoleService;
 
     @PostMapping("/insert")
-    public RetResult
-            <Integer> insert(UserRole userRole) throws Exception {
+    public RetResult<Integer> insert(UserRole userRole) throws Exception {
         userRole.setId(ApplicationUtils.getUUID());
         Integer state = userRoleService.insert(userRole);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/deleteById")
-    public RetResult
-            <Integer> deleteById(@RequestParam String id) throws Exception {
+    public RetResult<Integer> deleteById(@RequestParam String id) throws Exception {
         Integer state = userRoleService.deleteById(id);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/update")
-    public RetResult
-            <Integer> update(UserRole userRole) throws Exception {
+    public RetResult<Integer> update(UserRole userRole) throws Exception {
         Integer state = userRoleService.update(userRole);
         return RetResponse.makeOKRsp(state);
     }
@@ -64,10 +61,8 @@ public class UserRoleController {
      * <UserRole>>
      */
     @PostMapping("/list")
-    public RetResult
-            <PageInfo
-                    <UserRole>> list(@RequestParam(defaultValue = "0") Integer page,
-                                     @RequestParam(defaultValue = "0") Integer size) throws Exception {
+    public RetResult<PageInfo<UserRole>> list(@RequestParam(defaultValue = "0") Integer page,
+                                              @RequestParam(defaultValue = "0") Integer size) throws Exception {
         PageHelper.startPage(page, size);
         List<UserRole> list = userRoleService.selectAll();
         PageInfo<UserRole> pageInfo = new PageInfo<UserRole>(list);

@@ -47,23 +47,20 @@ public class UserInfoController {
 
 
     @PostMapping("/insert")
-    public RetResult
-            <Integer> insert(UserInfo userInfo) throws Exception {
+    public RetResult<Integer> insert(UserInfo userInfo) throws Exception {
         userInfo.setId(ApplicationUtils.getUUID());
         Integer state = userInfoService.insert(userInfo);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/deleteById")
-    public RetResult
-            <Integer> deleteById(@RequestParam String id) throws Exception {
+    public RetResult<Integer> deleteById(@RequestParam String id) throws Exception {
         Integer state = userInfoService.deleteById(id);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/update")
-    public RetResult
-            <Integer> update(UserInfo userInfo) throws Exception {
+    public RetResult<Integer> update(UserInfo userInfo) throws Exception {
         Integer state = userInfoService.update(userInfo);
         return RetResponse.makeOKRsp(state);
     }
@@ -84,10 +81,8 @@ public class UserInfoController {
      * <UserInfo>>
      */
     @GetMapping("/selectAll")
-    public RetResult
-            <PageInfo
-                    <UserInfo>> list(@RequestParam(defaultValue = "0") Integer page,
-                                     @RequestParam(defaultValue = "0") Integer size) throws Exception {
+    public RetResult<PageInfo<UserInfo>> list(@RequestParam(defaultValue = "0") Integer page,
+                                              @RequestParam(defaultValue = "0") Integer size) throws Exception {
         PageHelper.startPage(page, size);
         List<UserInfo> list = userInfoService.selectAll();
         PageInfo<UserInfo> pageInfo = new PageInfo<UserInfo>(list);

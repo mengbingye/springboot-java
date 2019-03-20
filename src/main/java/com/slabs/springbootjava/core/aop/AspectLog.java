@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.slabs.springbootjava.core.ret.ServiceException;
 import com.slabs.springbootjava.core.systemlog.SystemLogQueue;
 import com.slabs.springbootjava.core.utils.ApplicationUtils;
+import com.slabs.springbootjava.core.utils.IpUtil;
 import com.slabs.springbootjava.model.SystemLog;
 import com.slabs.springbootjava.model.UserInfo;
 import com.slabs.springbootjava.service.SystemLogService;
@@ -20,6 +21,8 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -82,6 +85,8 @@ public class AspectLog {
     }
 
     private SystemLog getSystemLogInit(JoinPoint p){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+                .getRequest();
         SystemLog systemLog = new SystemLog();
         try{
             //类名
@@ -97,8 +102,10 @@ public class AspectLog {
             systemLog.setId(ApplicationUtils.getUUID());
             systemLog.setDescription(getMthodRemark(p));
             systemLog.setMethod(targetClass+"."+tartgetMethod);
-            //大家可自行百度获取ip的方法
-            systemLog.setRequestIp("192.168.1.104");
+            // 获取用户的IP
+
+            String ipAddress = IpUtil.getIpAddress(request);
+            systemLog.setRequestIp(ipAddress);
             systemLog.setParams(JSON.toJSONString(nameAndArgs));
             systemLog.setUserId(getUserId());
             systemLog.setCreateTime(new Date());

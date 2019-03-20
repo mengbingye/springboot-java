@@ -28,23 +28,20 @@ public class SysRoleController {
     private SysRoleService sysRoleService;
 
     @PostMapping("/insert")
-    public RetResult
-            <Integer> insert(SysRole sysRole) throws Exception {
+    public RetResult<Integer> insert(SysRole sysRole) throws Exception {
         sysRole.setId(ApplicationUtils.getUUID());
         Integer state = sysRoleService.insert(sysRole);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/deleteById")
-    public RetResult
-            <Integer> deleteById(@RequestParam String id) throws Exception {
+    public RetResult<Integer> deleteById(@RequestParam String id) throws Exception {
         Integer state = sysRoleService.deleteById(id);
         return RetResponse.makeOKRsp(state);
     }
 
     @PostMapping("/update")
-    public RetResult
-            <Integer> update(SysRole sysRole) throws Exception {
+    public RetResult<Integer> update(SysRole sysRole) throws Exception {
         Integer state = sysRoleService.update(sysRole);
         return RetResponse.makeOKRsp(state);
     }
@@ -64,10 +61,8 @@ public class SysRoleController {
      * <SysRole>>
      */
     @PostMapping("/list")
-    public RetResult
-            <PageInfo
-                    <SysRole>> list(@RequestParam(defaultValue = "0") Integer page,
-                                    @RequestParam(defaultValue = "0") Integer size) throws Exception {
+    public RetResult<PageInfo<SysRole>> list(@RequestParam(defaultValue = "0") Integer page,
+                                             @RequestParam(defaultValue = "0") Integer size) throws Exception {
         PageHelper.startPage(page, size);
         List<SysRole> list = sysRoleService.selectAll();
         PageInfo<SysRole> pageInfo = new PageInfo<SysRole>(list);
